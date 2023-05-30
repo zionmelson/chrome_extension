@@ -1,0 +1,22 @@
+{
+  "name": "learnmutiny extension",
+  "description": "extension description",
+  "version": "1.0",
+  "manifest_version": 2,
+  "icons": {
+    "16":"logo192.png",
+    "48": "logo192.png"
+  },
+  "browser_action": {
+    "default_popup": "index.html"
+  },
+  "background": {
+    "scripts": ["background.js"],
+    "persistent": false
+  },
+  "permissions": [
+    "activeTab",
+    "bookmarks",
+    "storage"
+  ]
+}
