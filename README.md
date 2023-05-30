@@ -1,4 +1,4 @@
-Steps to run the clone extension
+Steps to run the chrome extension
 
 1. Clone this repository
 
