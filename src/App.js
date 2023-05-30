@@ -1,16 +1,21 @@
 import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import { AiOutlineClose } from 'react-icons/ai';
+import { LuRefreshCw } from 'react-icons/lu';
 import './App.css';
+import './index.css'
 
 const App = () => {
   const [url, setUrl] = useState('');
+  const [title, setTitle] = useState('');
   const [rating, setRating] = useState(0);
 
- //Get Current Url
+  //Get Current Url
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
       const currentTab = tabs[0];
       const currentUrl = currentTab.url;
+      const pageTitle = currentTab.title;
+      setTitle(pageTitle);
       setUrl(currentUrl);
     });
   }, []);
@@ -31,12 +36,27 @@ const App = () => {
     setRating(newRating);
   };
 
+  const handleCloseClick = () => {
+    window.close(); // Close the popup window
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>URL:</p>
-        <p>{url}</p>
+    <div>
+      <div className="top-container">
+        <div className="logo-container">
+          <img src={process.env.PUBLIC_URL + '/bear_without_background.png'} alt="bear without background" className="chrome-extension-logo" />
+          <h1>learnmutiny</h1>
+        </div>
+        <button onClick={handleCloseClick} className="close-popup"><AiOutlineClose className="close-popup" /></button>
+      </div>
+      <div className="bottom-container">
+        <h1 className="website-title">{title}</h1>
+        <div className="url-container">
+          <p>{url}</p>
+          <div className="refresh-container">
+            <LuRefreshCw /><span><p>Refresh</p></span>
+          </div>
+        </div>
         <form onSubmit={handleSubmit}>
           <div>
             <p>Rate the usefulness of the content:</p>
@@ -48,7 +68,7 @@ const App = () => {
           </div>
           <button type="submit">Bookmark</button>
         </form>
-      </header>
+      </div>
     </div>
   );
 };
