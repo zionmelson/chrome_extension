@@ -4,7 +4,7 @@ Steps to run the clone extension
 
 >git clone https://github.com/learnmutiny/chrome_extension
 
-3. Install the dependencies. 
+2. Install the dependencies. 
 
 To install the dependencies go to the chrome_extension folder and run npm install
 
@@ -15,7 +15,8 @@ To install the dependencies go to the chrome_extension folder and run npm instal
 3. Use the below command to Build the extension
 
 >npm run build
-5. Load the Extension in Chrome
+
+4. Load the Extension in Chrome
 
 Open Google Chrome and go to the Extensions page. Enable "Developer mode" by toggling the switch in the top right corner.
 
