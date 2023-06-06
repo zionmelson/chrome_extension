@@ -1,4 +1,5 @@
-
+// Hey VASTAV, I would rename this file to recommendation.js and add it to
+// the src folder. I can help style it tomorrow (Tuesday June 6th).
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -259,12 +260,15 @@ document.addEventListener("DOMContentLoaded", function () {
       const pageTitle = currentTab.title;
       const pageUrl = currentTab.url;
 
-      chrome.bookmarks.create({
-        title: pageTitle,
-        url: pageUrl,
-      }, function (bookmark) {
-        console.log("Bookmark created:", bookmark);
-      });
+      chrome.bookmarks.create(
+        {
+          title: pageTitle,
+          url: pageUrl,
+        },
+        function (bookmark) {
+          console.log("Bookmark created:", bookmark);
+        }
+      );
     });
   });
 });

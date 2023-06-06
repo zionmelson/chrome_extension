@@ -1,16 +1,35 @@
 {
   "manifest_version": 3,
-  "name": "My Extension",
-  "version": "1.0",
-  "description": "Retrieve and display recommended YouTube videos",
-  "host_permissions": [
-    "https://www.googleapis.com/*"
-  ],
+  "name": "learnmutiny extension",
+  "version": "2.0",
+  "description": "learnmutiny beta extension",
+  "icons": {
+    "16": "assets/bear.png",
+    "32": "assets/bear.png",
+    "48": "assets/bear.png",
+    "128": "assets/bear.png"
+  },
   "permissions": [
-    "activeTab"
+    "activeTab",
+    "tabs",
+    "scripting",
+    "bookmarks",
+    "storage",
+    "declarativeNetRequest",
+    "geolocation",
+    "mdns",
+    "proxy"
   ],
+  "host_permissions": ["<all_urls>"],
   "action": {
-    "default_popup": "popup.html"},
+    "default_icon": {
+      "16": "assets/bear2.png",
+      "24": "assets/bear2.png",
+      "32": "assets/bear2.png"
+    },
+    "default_title": "learnmutiny extension",
+    "default_popup": "src/bookmark/bookmark.html"
+  },
   "background": {
     "service_worker": "background.js"
   },
