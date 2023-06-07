@@ -1,5 +1,4 @@
-// Hey VASTAV, I would rename this file to recommendation.js and add it to
-// the src folder. I can help style it tomorrow (Tuesday June 6th).
+
 
 // document.addEventListener("DOMContentLoaded", function () {
 //   chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
@@ -132,8 +131,32 @@ document.addEventListener("DOMContentLoaded", function () {
       return;
     }
     const pageTitle = currentTab.title;
+    const url = new URL(currentTab.url);
+    const urlKeywords = url.hostname.split('.').slice(1, -1).join(' ');
+    const pathKeywords = url.pathname.split('/').filter(Boolean).join(' ');
     const sQuery = pageTitle.replace(/^\(\d+\)\s*/, "").split(" - YouTube")[0];
-    const searchQuery = sQuery.replace(/ - .*$/, "");
+    let searchQuery = sQuery.replace(/ - .*$/, "") + " " + urlKeywords + " " + pathKeywords;
+    
+    // Apply regex to modify searchQuery
+   
+    const words = searchQuery.trim().split(" ");
+    if (words.length >= 2 && /^(google|youtube)$/i.test(words[words.length - 2])) {
+      words.splice(words.length - 2, 2);
+    } else if (words.length >= 1 && /^(google|youtube)$/i.test(words[words.length - 1])) {
+      words.splice(words.length - 1, 1);
+    }
+    
+    // Check if the last word is "results" and remove it
+    if (words[words.length - 1].toLowerCase() === "results") {
+      words.splice(words.length - 1, 1);
+    }
+    
+    searchQuery = words.join(" ").trim();
+    
+    console.log(searchQuery);
+    
+
+
 
     chrome.runtime.sendMessage(
       { action: "getRecommendedVideos", query: searchQuery },
@@ -242,33 +265,72 @@ document.addEventListener("DOMContentLoaded", function () {
             booksList.appendChild(listItem);
           });
         }
-      }
-    );
-  });
-
-  const ratingInput = document.getElementById("rating");
-  ratingInput.addEventListener("input", function () {
-    const rating = parseInt(ratingInput.value);
-    console.log("Rating:", rating);
-    // Perform any action based on the rating value
-  });
-  const bookmarkButton = document.getElementById("bookmarkButton");
-
-  bookmarkButton.addEventListener("click", function () {
-    chrome.tabs.query({ active: true, currentWindow: true }, function (tabs) {
-      const currentTab = tabs[0];
-      const pageTitle = currentTab.title;
-      const pageUrl = currentTab.url;
-
-      chrome.bookmarks.create(
-        {
-          title: pageTitle,
-          url: pageUrl,
-        },
-        function (bookmark) {
-          console.log("Bookmark created:", bookmark);
+        if (response && response.movies) {
+          const movies = response.movies;
+          const moviesList = document.getElementById("moviesList");
+          moviesList.innerHTML = "";
+        
+          const queryElement = document.createElement("p");
+          queryElement.textContent = response.query;
+          moviesList.appendChild(queryElement);
+        
+          if (movies.length === 0) {
+            const noMovies = document.createElement("p");
+            noMovies.textContent = "No movies found.";
+            moviesList.appendChild(noMovies);
+          }
+        
+          movies.forEach((movie) => {
+            const listItem = document.createElement("li");
+        
+            const title = document.createElement("h3");
+            const movieLink = document.createElement("a");
+            movieLink.textContent = movie.title;
+            movieLink.href = `https://www.themoviedb.org/movie/${movie.movieId}`;
+            movieLink.target = "_blank";
+        
+            title.appendChild(movieLink);
+        
+            const thumbnail = document.createElement("img");
+            thumbnail.src = movie.thumbnail;
+        
+            listItem.appendChild(title);
+            listItem.appendChild(thumbnail);
+        
+            moviesList.appendChild(listItem);
+          });
         }
-      );
-    });
+        // if (response && response.publications) {
+        //   const publications = response.publications;
+        //   const publicationsList = document.getElementById("publicationsList");
+        //   publicationsList.innerHTML = "";
+
+        //   const queryElement = document.createElement("p");
+        //   queryElement.textContent = searchQuery;
+        //   publicationsList.appendChild(queryElement);
+
+        //   if (publications.length === 0) {
+        //     const noPublications = document.createElement("p");
+        //     noPublications.textContent = "No publications found.";
+        //     publicationsList.appendChild(noPublications);
+        //   }
+
+        //   publications.forEach((publication) => {
+        //     const listItem = document.createElement("li");
+
+        //     const title = document.createElement("h3");
+        //     const publicationLink = document.createElement("a");
+        //     publicationLink.textContent = publication.title;
+        //     publicationLink.href = publication.url;
+        //     publicationLink.target = "_blank";
+
+        //     title.appendChild(publicationLink);
+
+        //     listItem.appendChild(title);
+
+        //     publicationsList.appendChild(listItem);
+        //   });
+        // }
+      });
   });
-});
+}); 
