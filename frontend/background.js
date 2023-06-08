@@ -94,13 +94,13 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
     return true;
   }
   if (request.action === "bookmark") {
-    fetch('http://localhost:8000/mainapp/user/login/', {
+    fetch('http://3.131.38.234:8000/mainapp/user/login/', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        "email": "nakamurachassity@gmail.com",
+        "email": "test@gmail.com",
         "password": "developer2020!A"
       })
     })
@@ -112,7 +112,7 @@ chrome.runtime.onMessage.addListener(function (request, sender, sendResponse) {
                  currentDate.getDate() + " " + currentDate.getHours() + ":" + currentDate.getMinutes() + 
                  ":" + currentDate.getSeconds()
 
-      fetch('http://localhost:8000/mainapp/bookmark/', {
+      fetch('http://3.131.38.234:8000/mainapp/bookmark/', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
