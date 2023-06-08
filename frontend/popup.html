@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Extension Popup</title>
+  <style>
+    body {
+      width: 300px;
+      height: 400px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 120px;
+      height: 90px;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Video</h1>
+  <h2>Trending Vidoes</h2>
+  <ul id="videoList">
+  </ul>
+  <h1>Articles</h1>
+  <h2>Trending Articles</h2>
+  <ul id="articlesList"></ul>
+  <h1>Books</h1>
+  <h2>Trending Books</h2>
+  <ul id="booksList"></ul>
+  <h1>Rate this Extension</h1>
+  <div>
+    <label for="rating">Rating:</label>
+    <input type="number" id="rating" min="0" max="5" step="1">
+  </div>
+  <h1>Bookmark Current Page</h1>
+  <button id="bookmarkButton">Bookmark</button>
+
+  <script src="popup.js"></script>
+</body>
+
+</html>
+
+<!-- <!DOCTYPE html>
+<html>
+
+<head>
+  <title>My Extension Popup</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+  <style>
+    body {
+      width: 300px;
+      height: 400px;
+      padding: 20px;
+      font-family: Arial, sans-serif;
+      font-size: 14px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      overflow-y: auto;
+    }
+
+    li {
+      margin-bottom: 10px;
+    }
+
+    img {
+      width: 120px;
+      height: 90px;
+    }
+
+    .rating {
+      display: inline-block;
+      unicode-bidi: bidi-override;
+      color: #888888;
+      font-size: 20px;
+      height: 20px;
+      position: relative;
+      margin-bottom: 10px;
+    }
+
+    .rating-star {
+      display: inline-block;
+      position: relative;
+      font-family: FontAwesome;
+      font-style: normal;
+      font-weight: normal;
+      line-height: 1;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .rating-star.checked {
+      color: orange;
+    }
+  </style>
+</head>
+
+<body>
+  <h1>Video</h1>
+  <h2>Trending Vidoes</h2>
+  <ul id="videoList">
+  </ul>
+  <h1>Articles</h1>
+  <h2>Trending Articles</h2>
+  <ul id="articlesList"></ul>
+  <h1>Books</h1>
+  <h2>Trending Books</h2>
+  <ul id="booksList"></ul>
+
+  <div class="rating" id="starRating">
+    <span class="fa fa-star rating-star"></span>
+    <span class="fa fa-star rating-star"></span>
+    <span class="fa fa-star rating-star"></span>
+    <span class="fa fa-star rating-star"></span>
+    <span class="fa fa-star rating-star"></span>
+  </div>
+  
+
+  <script src="popup.js"></script>
+</body>
+
+</html> -->
+
