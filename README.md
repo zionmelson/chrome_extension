@@ -1,29 +1,24 @@
-Steps to run the chrome extension
+# chrome_extension
+Currently only the bookmark feature is working in this beta version.
 
-1. Clone this repository
+## Run chrome extesion
+1. Install node moduels. Run below command under frontend folder
+   ```shell
+   npm install
+   ```
+2. Build the project.
+   ```shell
+   npm run build
+   ```
+3. Load the chrome extension.
 
->git clone https://github.com/learnmutiny/chrome_extension
-
-2. Install the dependencies. 
-
-To install the dependencies go to the chrome_extension folder and run npm install
-
->cd chrome_extension
-
->npm install
-
-3. Use the below command to Build the extension
-
->npm run build
-
-4. Load the Extension in Chrome
-
->Open Google Chrome and go to the Extensions page. Enable "Developer mode" by toggling the switch in the top right corner.
-
-5. Load the Extension's Build Folder: 
-
->Click on "Load unpacked" and select the build folder generated in step 3. This will load your extension into Chrome.
-
-6. Test the Extension: 
-
->Once loaded, you should see the extension's icon in the browser toolbar.(for now you will icon with react logo) Click on the icon to test the functionality of the extension in a Chrome browser.
+# Run backend
+I used the Django with python 3.9.12.
+1. Under the backend, you need to install the python libraries.
+   ```shell
+   pip install -r requirements.txt
+   ```
+2. Run server
+   ```
+   python manage.py runserver 0.0.0.0:8000
+   ```
