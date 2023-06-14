@@ -51,7 +51,7 @@
 
   .bookmark-info {
     padding: 5px;
-    margin-top: 0;
+    margin-top: 5px;
     background-color: #3b3b3b;
     display: flex;
     flex-direction: column;
@@ -120,8 +120,8 @@
   }
 
   .bear-image{
-    width:300px;
-    height:300px;
+    width:200px;
+    height:200px;
   }
 
 

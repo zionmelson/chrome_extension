@@ -17,22 +17,22 @@ const Footer = () => {
                 <div className={`footer-item ${activeIcon === 'bookmark' ? 'active' : ''}`} onClick={() => handleClick('bookmark')}>
                     <FontAwesomeIcon icon={faBookmark} className="fa-2x" />
                 </div>
-                <div className={`footer-item like-button ${activeIcon === 'thumbsUp' ? 'active' : ''}`} onClick={() => handleClick('thumbsUp')}>
-                    <Link to="/thumbs-up" className={`footer-item like-button ${activeIcon === 'thumbsUp' ? 'active' : ''}`} onClick={() => handleClick('thumbsUp')}>
-                        <FontAwesomeIcon icon={faThumbsUp} className="fa-2x" />
-                    </Link>
-                </div>
-                <div className={`footer-item search-icon ${activeIcon === 'search' ? 'active' : ''}`} onClick={() => handleClick('search')}>
-                    <Link to="/search" className={`footer-item search-icon ${activeIcon === 'search' ? 'active' : ''}`} onClick={() => handleClick('search')}>
+
+                <Link to="/thumbs-up" className='footer-item'>
+                    <FontAwesomeIcon icon={faThumbsUp} className="fa-2x" />
+                </Link>
+
+                
+                    <Link to="/search" className='footer-item'>
                         <FontAwesomeIcon icon={faSearch} className="fa-2x" />
                     </Link>
-                </div>
+              
             </div>
-            <div className={`footer-item ${activeIcon === 'cog' ? 'active' : ''}`} onClick={() => handleClick('cog')}>
-                <Link to="/settings" className={`footer-item ${activeIcon === 'cog' ? 'active' : ''}`} onClick={() => handleClick('cog')}>
-                    <FontAwesomeIcon icon={faCog} className="fa-2x" />
-                </Link>
-            </div>
+
+            <Link to="/settings" className='footer-item'>
+                <FontAwesomeIcon icon={faCog} className="fa-2x" />
+            </Link>
+
         </footer>
     );
 };

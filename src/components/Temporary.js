@@ -1,4 +1,5 @@
 import React from 'react';
+import Footer from './Footer';
 import { AiOutlineClose } from 'react-icons/ai';
 import './index.css'
 
@@ -25,6 +26,7 @@ const Bookmark = () => {
                 <img src={process.env.PUBLIC_URL + '/bear_without_background.png'} alt="bear without background" className="bear-image" />
                 </div>
             </div>
+            <Footer/>
         </div>
     );
 };
