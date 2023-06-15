@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import Footer from "./Footer";
 import Rating from "./Rating";
 import Invalid from "./Temporary";
 import "./index.css";
+import Header from "./Header";
 
 const Bookmark = () => {
   const [url, setUrl] = useState("");
@@ -38,27 +38,11 @@ const Bookmark = () => {
     e.preventDefault();
   };
 
-  const handleCloseClick = () => {
-    window.close(); // Close the popup window
-  };
-
   return (
     <div>
       {validUrl ? (
         <div>
-          <div className="top-container">
-            <div className="logo-container">
-              <img
-                src={process.env.PUBLIC_URL + "/bear_without_background.png"}
-                alt="bear without background"
-                className="chrome-extension-logo"
-              />
-              <h1>learnmutiny</h1>
-            </div>
-            <button onClick={handleCloseClick} className="close-popup">
-              <AiOutlineClose className="close-popup" />
-            </button>
-          </div>
+          <Header />
           <div className="bottom-container">
             <div className="top-container">
               <div>
