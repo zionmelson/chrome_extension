@@ -24,10 +24,10 @@ const Invalid = () => {
         </button>
       </div>
       <div className="bottom-container">
-        <div className="top-container">
+        <div className="temp-container">
           <h1>
-            There doesn&apos;t seem to be anything on this page I can help you
-            out with yet.
+            seems like there isn&apos;t anything on this page I can help you out
+            with yet.
           </h1>
         </div>
         <div className="bookmark-info">
