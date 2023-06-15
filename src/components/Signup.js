@@ -4,17 +4,18 @@ import {  AiOutlineClose } from 'react-icons/ai';
 import './index.css';
 
 const Signup = () => {
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
 
-    const [username, setUsername] = useState('');
-    const [password, setPassword] = useState('');
-    const [isAuthorized, setAuthorized] = useState(localStorage.getItem("userLogedIn"));
-    const handleUsernameChange = (e) => {
-        setUsername(e.target.value);
-    };
+  const [isAuthorized, setAuthorized] = useState(localStorage.getItem("userLogedIn"));
+    
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
 
-    const handlePasswordChange = (e) => {
-        setPassword(e.target.value);
-    };
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
     const handleSignin = () => {
         //signup logic
@@ -122,7 +123,7 @@ const Signup = () => {
             </div>
             <Footer />
         </div>
-    );
+  );
 };
 
 export default Signup;

@@ -1,16 +1,18 @@
 import React, { useEffect, useState } from "react";
-import { AiOutlineClose } from "react-icons/ai";
 import Footer from "./Footer";
 import Rating from "./Rating";
 import Invalid from "./Temporary";
 import "./index.css";
+import Header from "./Header";
 
 const Bookmark = () => {
   const [url, setUrl] = useState("");
   const [title, setTitle] = useState("");
   const [rating, setRating] = useState(0);
   const [icon, setIcon] = useState("");
+  const [keywords, setKeywords] = useState("");
   const [validUrl, setValidUrl] = useState(true);
+  const [isVideo, setIsVideo] = useState(true);
 
   //Get Current Url
   useEffect(() => {
@@ -26,10 +28,43 @@ const Bookmark = () => {
           ? `${currentUrl.substring(0, 30)}...`
           : currentUrl;
 
+      // key word extraction
+      const url = new URL(currentUrl);
+      const urlKeywords = url.hostname.split(".").slice(1, -1).join(" ");
+      const pathKeywords = url.pathname.split("/").filter(Boolean).join(" ");
+      const sQuery = pageTitle
+        .replace(/^\(\d+\)\s*/, "")
+        .split(" - YouTube")[0];
+      let searchQuery =
+        sQuery.replace(/ - .*$/, "") + " " + urlKeywords + " " + pathKeywords;
+
+      // Apply regex to modify searchQuery
+      const words = searchQuery.trim().split(" ");
+      if (
+        words.length >= 2 &&
+        /^(google|youtube)$/i.test(words[words.length - 2])
+      ) {
+        words.splice(words.length - 2, 2);
+      } else if (
+        words.length >= 1 &&
+        /^(google|youtube)$/i.test(words[words.length - 1])
+      ) {
+        words.splice(words.length - 1, 1);
+      }
+      // Check if the last word is "results" and remove it
+      if (words[words.length - 1].toLowerCase() === "results") {
+        words.splice(words.length - 1, 1);
+      }
+      searchQuery = words.join(" ").trim();
+
       setTitle(truncatedTitle);
       setUrl(truncatedUrl);
       setIcon(pageIcon);
-      setValidUrl(currentUrl.startsWith("https://"));
+      setKeywords(searchQuery);
+      setValidUrl(
+        currentUrl.startsWith("https://") && !currentUrl.includes(".edu")
+      );
+      setIsVideo(currentUrl.startsWith("https://www.youtube.com/watch?"));
     });
   }, []);
 
@@ -42,7 +77,7 @@ const Bookmark = () => {
             url: `${process.env.REACT_APP_API_URL}/mainapp/bookmark/`,
             title: title,
             rating: rating,
-            keyword: "",
+            keyword: keywords,
             bookmarkurl: url,
             access: localStorage.getItem("access")
         }, 
@@ -57,27 +92,11 @@ const Bookmark = () => {
     }
   };
 
-  const handleCloseClick = () => {
-    window.close(); // Close the popup window
-  };
-
   return (
     <div>
       {validUrl ? (
         <div>
-          <div className="top-container">
-            <div className="logo-container">
-              <img
-                src={process.env.PUBLIC_URL + "/bear_without_background.png"}
-                alt="bear without background"
-                className="chrome-extension-logo"
-              />
-              <h1>learnmutiny</h1>
-            </div>
-            <button onClick={handleCloseClick} className="close-popup">
-              <AiOutlineClose className="close-popup" />
-            </button>
-          </div>
+          <Header />
           <div className="bottom-container">
             <div className="top-container">
               <div>
@@ -90,7 +109,11 @@ const Bookmark = () => {
             </div>
 
             <div className="bookmark-info">
-              <h2 className="how-helpful">How helpful was this link?</h2>
+              {isVideo ? (
+                <h2 className="how-helpful">How helpful was this video?</h2>
+              ) : (
+                <h2 className="how-helpful">How helpful was this link?</h2>
+              )}
               <div className="rating">
                 <Rating rating={rating} onRating={(rate) => setRating(rate)} />
               </div>
@@ -109,6 +132,6 @@ const Bookmark = () => {
       )}
     </div>
   );
-};
+}
 
 export default Bookmark;
