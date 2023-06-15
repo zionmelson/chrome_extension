@@ -39,12 +39,14 @@ const Footer = () => {
       <div className="footer-top-items">
         <Link
           to="/"
-         className="footer-item"
+          className="footer-item"
           onClick={() => handleClick("bookmark")}
         >
           <FontAwesomeIcon
             icon={faBookmark}
-            className={`fa-3x ${activeIcon === "bookmark" ? "active" : "inactive"}`}
+            className={`fa-3x ${
+              activeIcon === "bookmark" ? "active" : "inactive"
+            }`}
           />
         </Link>
 
@@ -55,7 +57,9 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faThumbsUp}
-            className={`fa-3x ${activeIcon === "thumbs-up" ? "active" : "inactive"}`}
+            className={`fa-3x ${
+              activeIcon === "thumbs-up" ? "active" : "inactive"
+            }`}
           />
         </Link>
 
@@ -66,9 +70,13 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faSearch}
-            className={`fa-3x ${activeIcon === "search" ? "active" : "inactive"}`}
+            className={`fa-3x ${
+              activeIcon === "search" ? "active" : "inactive"
+            }`}
           />
         </Link>
+      </div>
+      <div className="footer-top-items">
         <Link
           to="/auth"
           className="footer-item"
@@ -76,21 +84,22 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faUserCircle}
-            className={`fa-3x ${activeIcon === "auth" ? "active" : "inactive"}`}
+            className={`fa-2x ${activeIcon === "auth" ? "active" : "inactive"}`}
+          />
+        </Link>
+        <Link
+          to="/settings"
+          className="footer-item"
+          onClick={() => handleClick("settings")}
+        >
+          <FontAwesomeIcon
+            icon={faCog}
+            className={`fa-2x  ${
+              activeIcon === "settings" ? "active" : "inactive"
+            }`}
           />
         </Link>
       </div>
-
-      <Link
-        to="/settings"
-        className="footer-item"
-        onClick={() => handleClick("settings")}
-      >
-        <FontAwesomeIcon
-          icon={faCog}
-          className={`fa-3x  ${activeIcon === "settings" ? "active" : "inactive"}`}
-        />
-      </Link>
     </footer>
   );
 };
