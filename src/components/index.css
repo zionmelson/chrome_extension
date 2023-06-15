@@ -164,3 +164,11 @@ input[type="password"] {
 .temp-container {
   text-align: center;
 }
+
+.active{
+    color: #fff;
+}
+
+.inactive{
+    color:#8b8b8b
+}

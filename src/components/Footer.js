@@ -8,8 +8,7 @@ import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import "./index.css";
 
 const Footer = () => {
-  const [activeIcon, setActiveIcon] = useState("");
-  const [_color, _setColor] = useState("");
+  const [activeIcon, setActiveIcon] = useState("bookmark");
 
   const location = useLocation();
 
@@ -32,8 +31,7 @@ const Footer = () => {
   }, [location]);
 
   const handleClick = (iconName) => {
-    setActiveIcon((prevIcon) => (prevIcon === iconName ? "" : iconName));
-    _setColor("#ffebee");
+    setActiveIcon(iconName);
   };
 
   return (
@@ -41,13 +39,12 @@ const Footer = () => {
       <div className="footer-top-items">
         <Link
           to="/"
-          className={`footer-item ${activeIcon === "bookmark" ? "active" : ""}`}
-          onClick={() => handleClick("bookmark", _color)}
+         className="footer-item"
+          onClick={() => handleClick("bookmark")}
         >
           <FontAwesomeIcon
             icon={faBookmark}
-            className="fa-3x"
-            style={{ color: _color }}
+            className={`fa-3x ${activeIcon === "bookmark" ? "active" : "inactive"}`}
           />
         </Link>
 
@@ -58,8 +55,7 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faThumbsUp}
-            className="fa-3x"
-            style={{ color: "#8b8b8b" }}
+            className={`fa-3x ${activeIcon === "thumbs-up" ? "active" : "inactive"}`}
           />
         </Link>
 
@@ -70,8 +66,7 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faSearch}
-            className="fa-3x"
-            style={{ color: "#8b8b8b" }}
+            className={`fa-3x ${activeIcon === "search" ? "active" : "inactive"}`}
           />
         </Link>
         <Link
@@ -81,8 +76,7 @@ const Footer = () => {
         >
           <FontAwesomeIcon
             icon={faUserCircle}
-            className="fa-2x"
-            style={{ color: "#8b8b8b" }}
+            className={`fa-3x ${activeIcon === "auth" ? "active" : "inactive"}`}
           />
         </Link>
       </div>
@@ -94,8 +88,7 @@ const Footer = () => {
       >
         <FontAwesomeIcon
           icon={faCog}
-          className="fa-2x"
-          style={{ color: "#8b8b8b" }}
+          className={`fa-3x  ${activeIcon === "settings" ? "active" : "inactive"}`}
         />
       </Link>
     </footer>
