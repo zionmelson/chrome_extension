@@ -4,21 +4,18 @@
   "version": "1.0",
   "manifest_version": 2,
   "icons": {
-    "16":"logo192.png",
-    "48": "logo192.png",
-    "128": "logo192.png",
-    "256": "logo192.png"
+    "16": "bear_without_background.png",
+    "48": "bear_without_background.png",
+    "128": "bear_without_background.png",
+    "256": "bear_without_background.png"
   },
   "browser_action": {
-    "default_popup": "index.html"
+    "default_popup": "index.html",
+    "default_icon": "bear_close_without_background.png"
   },
   "background": {
     "scripts": ["background.js"],
     "persistent": false
   },
-  "permissions": [
-    "activeTab",
-    "bookmarks",
-    "storage"
-  ]
+  "permissions": ["activeTab", "bookmarks", "storage"]
 }
