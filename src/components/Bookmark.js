@@ -29,7 +29,9 @@ const Bookmark = () => {
       setTitle(truncatedTitle);
       setUrl(truncatedUrl);
       setIcon(pageIcon);
-      setValidUrl(currentUrl.startsWith("https://"));
+      setValidUrl(
+        currentUrl.startsWith("https://") && !currentUrl.includes(".edu")
+      );
     });
   }, []);
 
