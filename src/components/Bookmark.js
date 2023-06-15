@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faStar } from "@fortawesome/free-solid-svg-icons";
 import { AiOutlineClose } from "react-icons/ai";
 import Footer from "./Footer";
+import Rating from "./Rating";
+import Invalid from "./Temporary";
 import "./index.css";
 
 const Bookmark = () => {
@@ -10,7 +10,8 @@ const Bookmark = () => {
   const [title, setTitle] = useState("");
   const [rating, setRating] = useState(0);
   const [icon, setIcon] = useState("");
-  const [starRatingEnabled, setStarRatingEnabled] = useState(false);
+  const [validUrl, setValidUrl] = useState(true);
+
   //Get Current Url
   useEffect(() => {
     chrome.tabs.query({ active: true, currentWindow: true }, (tabs) => {
@@ -28,29 +29,13 @@ const Bookmark = () => {
       setTitle(truncatedTitle);
       setUrl(truncatedUrl);
       setIcon(pageIcon);
-      setStarRatingEnabled(true);
+      setValidUrl(currentUrl.startsWith("https://"));
     });
   }, []);
 
   const handleBookmark = async (e) => {
     //code to handle bookmark
     e.preventDefault();
-    setStarRatingEnabled(true);
-  };
-
-  const handleStarClick = (currentStar) => {
-    if (!starRatingEnabled) return;
-
-    setRating(currentStar);
-
-    const stars = document.querySelectorAll(".stars");
-    stars.forEach((star, i) => {
-      if (currentStar >= i + 1) {
-        star.style.color = "#FFAB09";
-      } else {
-        star.style.color = "#D9D9D9";
-      }
-    });
   };
 
   const handleCloseClick = () => {
@@ -59,53 +44,50 @@ const Bookmark = () => {
 
   return (
     <div>
-      <div className="top-container">
-        <div className="logo-container">
-          <img
-            src={process.env.PUBLIC_URL + "/bear_without_background.png"}
-            alt="bear without background"
-            className="chrome-extension-logo"
-          />
-          <h1>learnmutiny</h1>
-        </div>
-        <button onClick={handleCloseClick} className="close-popup">
-          <AiOutlineClose className="close-popup" />
-        </button>
-      </div>
-      <div className="bottom-container">
-        <div className="top-container">
-          <div>
-            <h1 className="website-title">{title}</h1>
-            <p>{url}</p>
+      {validUrl ? (
+        <div>
+          <div className="top-container">
+            <div className="logo-container">
+              <img
+                src={process.env.PUBLIC_URL + "/bear_without_background.png"}
+                alt="bear without background"
+                className="chrome-extension-logo"
+              />
+              <h1>learnmutiny</h1>
+            </div>
+            <button onClick={handleCloseClick} className="close-popup">
+              <AiOutlineClose className="close-popup" />
+            </button>
           </div>
-          <div>
-            <img src={icon} style={{ width: "50px", height: "50px" }} />
-          </div>
-        </div>
+          <div className="bottom-container">
+            <div className="top-container">
+              <div>
+                <h1 className="website-title">{title}</h1>
+                <p>{url}</p>
+              </div>
+              <div>
+                <img src={icon} style={{ width: "50px", height: "50px" }} />
+              </div>
+            </div>
 
-        <div className="bookmark-info">
-          <h2 className="how-helpful">How helpful was this link?</h2>
-          <div className="rating">
-            {[1, 2, 3, 4, 5].map((star) => (
-              <button
-                key={star}
-                className="stars"
-                onClick={() => handleStarClick(star)}
-              >
-                <FontAwesomeIcon
-                  icon={faStar}
-                  className={star <= rating ? "checked" : ""}
-                />
+            <div className="bookmark-info">
+              <h2 className="how-helpful">How helpful was this link?</h2>
+              <div className="rating">
+                <Rating rating={rating} onRating={(rate) => setRating(rate)} />
+              </div>
+              <button className="add-bookmark" onClick={handleBookmark}>
+                Bookmark
               </button>
-            ))}
+              <p className="rating-text">{`${rating}.0 / 5.0 stars`}</p>
+            </div>
           </div>
-          <button className="add-bookmark" onClick={handleBookmark}>
-            Bookmark
-          </button>
-          <p className="rating-text">{`${rating}.0 / 5.0 stars`}</p>
+          <Footer />
         </div>
-      </div>
-      <Footer />
+      ) : (
+        <div className="invalid-url">
+          <Invalid />
+        </div>
+      )}
     </div>
   );
 };

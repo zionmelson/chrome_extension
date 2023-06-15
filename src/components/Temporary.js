@@ -3,7 +3,7 @@ import Footer from "./Footer";
 import { AiOutlineClose } from "react-icons/ai";
 import "./index.css";
 
-const Bookmark = () => {
+const Invalid = () => {
   const handleCloseClick = () => {
     window.close(); // Close the popup window
   };
@@ -43,4 +43,4 @@ const Bookmark = () => {
   );
 };
 
-export default Bookmark;
+export default Invalid;
