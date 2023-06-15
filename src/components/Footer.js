@@ -69,17 +69,18 @@ const Footer = () => {
             className={`fa-3x ${activeIcon === "search" ? "active" : "inactive"}`}
           />
         </Link>
-        <Link
+      </div>
+      <div className="footer-top-items">
+      <Link
           to="/auth"
           className="footer-item"
           onClick={() => handleClick("auth")}
         >
           <FontAwesomeIcon
             icon={faUserCircle}
-            className={`fa-3x ${activeIcon === "auth" ? "active" : "inactive"}`}
+            className={`fa-2x ${activeIcon === "auth" ? "active" : "inactive"}`}
           />
         </Link>
-      </div>
 
       <Link
         to="/settings"
@@ -88,9 +89,10 @@ const Footer = () => {
       >
         <FontAwesomeIcon
           icon={faCog}
-          className={`fa-3x  ${activeIcon === "settings" ? "active" : "inactive"}`}
+          className={`fa-2x  ${activeIcon === "settings" ? "active" : "inactive"}`}
         />
       </Link>
+      </div>
     </footer>
   );
 };
