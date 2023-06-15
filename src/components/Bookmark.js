@@ -11,6 +11,7 @@ const Bookmark = () => {
   const [rating, setRating] = useState(0);
   const [icon, setIcon] = useState("");
   const [validUrl, setValidUrl] = useState(true);
+  const [isVideo, setIsVideo] = useState(true);
 
   //Get Current Url
   useEffect(() => {
@@ -32,6 +33,7 @@ const Bookmark = () => {
       setValidUrl(
         currentUrl.startsWith("https://") && !currentUrl.includes(".edu")
       );
+      setIsVideo(currentUrl.startsWith("https://www.youtube.com/watch?"));
     });
   }, []);
 
@@ -57,7 +59,11 @@ const Bookmark = () => {
             </div>
 
             <div className="bookmark-info">
-              <h2 className="how-helpful">How helpful was this link?</h2>
+              {isVideo ? (
+                <h2 className="how-helpful">How helpful was this video?</h2>
+              ) : (
+                <h2 className="how-helpful">How helpful was this link?</h2>
+              )}
               <div className="rating">
                 <Rating rating={rating} onRating={(rate) => setRating(rate)} />
               </div>
