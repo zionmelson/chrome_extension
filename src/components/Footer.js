@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faThumbsUp, faBookmark } from "@fortawesome/free-regular-svg-icons";
 import { faSearch, faCog } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle } from "@fortawesome/free-regular-svg-icons";
 import "./index.css";
 
 const Footer = () => {
@@ -23,6 +24,8 @@ const Footer = () => {
       setActiveIcon("search");
     } else if (pathname === "/settings") {
       setActiveIcon("settings");
+    } else if (pathname === "/auth") {
+      setActiveIcon("auth");
     } else {
       setActiveIcon("");
     }
@@ -68,6 +71,17 @@ const Footer = () => {
           <FontAwesomeIcon
             icon={faSearch}
             className="fa-3x"
+            style={{ color: "#8b8b8b" }}
+          />
+        </Link>
+        <Link
+          to="/auth"
+          className="footer-item"
+          onClick={() => handleClick("auth")}
+        >
+          <FontAwesomeIcon
+            icon={faUserCircle}
+            className="fa-2x"
             style={{ color: "#8b8b8b" }}
           />
         </Link>

@@ -1,0 +1,5 @@
+{
+    "POST_MAINAPP_USER_LOGIN": "/mainapp/user/login",
+    "POST_MAINAPP_USER_REGISTER": "/mainapp/user/register",
+    "POST_MAINAPP_BOOKMARK": "/mainapp/bookmark"
+}
