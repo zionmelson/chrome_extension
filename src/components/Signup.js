@@ -1,14 +1,13 @@
 import React, { useState } from 'react';
+import Footer from "./Footer";
 import {  AiOutlineClose } from 'react-icons/ai';
-import { userLogin} from '../services';
 import './index.css';
 
 const Signup = () => {
 
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [isAuthorized, setAuthorized] = useState(localStorage.getItem("isAuthorized"));
-
+    const [isAuthorized, setAuthorized] = useState(localStorage.getItem("userLogedIn"));
     const handleUsernameChange = (e) => {
         setUsername(e.target.value);
     };
@@ -27,6 +26,9 @@ const Signup = () => {
                 url: `${process.env.REACT_APP_API_URL}/mainapp/user/login/`
             }, 
             (result) => {
+                localStorage.setItem("refresh", result.refresh);
+                localStorage.setItem("access", result.access);
+                localStorage.setItem("userLogedIn", true);
                 setAuthorized(result.success);
             }
         );
@@ -39,10 +41,25 @@ const Signup = () => {
                 action: "userRegister", 
                 username: username, 
                 password: password,
-                url: `${process.env.REACT_APP_API_URL}/mainapp/user/login/`
+                url: `${process.env.REACT_APP_API_URL}/mainapp/user/register/`
             }, 
             (result) => {
-                setAuthorized(result.success);
+                if (result.success) {
+                    chrome.runtime.sendMessage(
+                        { 
+                            action: "userLogin", 
+                            username: username, 
+                            password: password,
+                            url: `${process.env.REACT_APP_API_URL}/mainapp/user/login/`
+                        }, 
+                        (result) => {
+                            localStorage.setItem("refresh", result.refresh);
+                            localStorage.setItem("access", result.access);
+                            localStorage.setItem("userLogedIn", true);
+                            setAuthorized(result.success);
+                        }
+                    );
+                }
             }
         );
     };
@@ -50,7 +67,8 @@ const Signup = () => {
     const handleLogout = () => {
         localStorage.removeItem("refresh");
         localStorage.removeItem("access");
-        localStorage.removeItem("isAuthorized");
+        localStorage.removeItem("userLogedIn");
+        setAuthorized(false);
     }
 
     const handleCloseClick = () => {
@@ -102,6 +120,7 @@ const Signup = () => {
                     )
                 }                
             </div>
+            <Footer />
         </div>
     );
 };

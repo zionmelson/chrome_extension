@@ -33,9 +33,28 @@ const Bookmark = () => {
     });
   }, []);
 
-  const handleBookmark = async (e) => {
+  const handleBookmark = async () => {
     //code to handle bookmark
-    e.preventDefault();
+    if (localStorage.getItem("userLogedIn")) {
+      chrome.runtime.sendMessage(
+        { 
+            action: "bookmark",
+            url: `${process.env.REACT_APP_API_URL}/mainapp/bookmark/`,
+            title: title,
+            rating: rating,
+            keyword: "",
+            bookmarkurl: url,
+            access: localStorage.getItem("access")
+        }, 
+        (result) => {
+          if (result) {
+            // success
+          } else {
+            //fail
+          }
+        }
+      );
+    }
   };
 
   const handleCloseClick = () => {
