@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
-import Footer from "./Footer";
+import Footer from './Footer';
 import {  AiOutlineClose } from 'react-icons/ai';
 import './index.css';
 
 const Signup = () => {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
-
+  const [signedup, setSignedup] = useState(false);
+  const [error, setError] = useState(false);
   const [isAuthorized, setAuthorized] = useState(localStorage.getItem("userLogedIn"));
     
   const handleUsernameChange = (e) => {
@@ -27,9 +28,14 @@ const Signup = () => {
                 url: `${process.env.REACT_APP_API_URL}/mainapp/user/login/`
             }, 
             (result) => {
-                localStorage.setItem("refresh", result.refresh);
-                localStorage.setItem("access", result.access);
-                localStorage.setItem("userLogedIn", true);
+                if (result.success) {
+                    localStorage.setItem("refresh", result.refresh);
+                    localStorage.setItem("access", result.access);
+                    localStorage.setItem("userLogedIn", true);
+                    localStorage.setItem("email", username);
+                } else {
+                    setError(true);
+                }             
                 setAuthorized(result.success);
             }
         );
@@ -54,23 +60,20 @@ const Signup = () => {
                             url: `${process.env.REACT_APP_API_URL}/mainapp/user/login/`
                         }, 
                         (result) => {
-                            localStorage.setItem("refresh", result.refresh);
-                            localStorage.setItem("access", result.access);
-                            localStorage.setItem("userLogedIn", true);
-                            setAuthorized(result.success);
+                            if (result.success) {
+                                localStorage.setItem("refresh", result.refresh);
+                                localStorage.setItem("access", result.access);
+                                localStorage.setItem("userLogedIn", true);
+                                localStorage.setItem("email", username);
+                                setSignedup(true);
+                            }                            
+                            setAuthorized(result.success);                            
                         }
                     );
                 }
             }
         );
     };
-
-    const handleLogout = () => {
-        localStorage.removeItem("refresh");
-        localStorage.removeItem("access");
-        localStorage.removeItem("userLogedIn");
-        setAuthorized(false);
-    }
 
     const handleCloseClick = () => {
         window.close(); // Close the popup window
@@ -90,38 +93,52 @@ const Signup = () => {
                     isAuthorized ?
                     (
                         <>
-                        <div className="top-container">
-                            <h1>You are already logged in.</h1>
+                        <div className="temp-container">
+                            {
+                                signedup ? <h1>Greate your signed up.</h1> :
+                                <>
+                                <div>signed in:</div>
+                                <h1>{localStorage.getItem("email")}</h1>
+                                </>
+                            }
                         </div>
-                        <div>
-                            <button onClick={handleLogout} className="signup-button">Log Out</button>
+                        <div className="bookmark-info">
+                        <img
+                            src={process.env.PUBLIC_URL + "/bear_without_background.png"}
+                            alt="bear without background"
+                            className="bear-image"
+                        />
                         </div>
+                        <Footer />
                         </>
                     ) :
                     (
                         <>
                         <div className="top-container">
                             <h1>Signup</h1>
+                            {
+                                error &&
+                                <div className="sign-error-label">Account not found</div>
+                            }
                         </div>
                         <div className="signup-container">
                             <div>
                                 <label htmlFor="username">Email</label>
-                                <input type="text" id="username" value={username} onChange={handleUsernameChange} className='form-field' />
+                                <input type="text" id="username" value={username} onChange={handleUsernameChange} className={error ? "form-field-error" : "form-field"} />
                             </div>
                             <div>
                                 <label htmlFor="password">Password</label>
-                                <input type="password" id="password" value={password} onChange={handlePasswordChange}  className='form-field' />
+                                <input type="password" id="password" value={password} onChange={handlePasswordChange}  className={error ? "form-field-error" : "form-field"} />
                             </div>
                             <div className="signup-button-container">
                                 <button onClick={handleSignup} className="signup-button">Sign up</button>
-                                <button onClick={handleSignin} className="signup-button">Sign in</button>
+                                <button onClick={handleSignin} className={error ? "signup-button-error" : "signup-button"}>Sign in</button>
                             </div>
                         </div>
                         </>
                     )
                 }                
             </div>
-            <Footer />
         </div>
   );
 };

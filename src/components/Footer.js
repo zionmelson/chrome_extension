@@ -16,15 +16,15 @@ const Footer = () => {
     const { pathname } = location;
 
     if (pathname === "/") {
-      setActiveIcon("bookmark");
+      setActiveIcon("auth");
     } else if (pathname === "/thumbs-up") {
       setActiveIcon("thumbs-up");
     } else if (pathname === "/search") {
       setActiveIcon("search");
     } else if (pathname === "/settings") {
       setActiveIcon("settings");
-    } else if (pathname === "/auth") {
-      setActiveIcon("auth");
+    } else if (pathname === "/bookmark") {
+      setActiveIcon("bookmark");
     } else {
       setActiveIcon("");
     }
@@ -38,7 +38,7 @@ const Footer = () => {
     <footer className="footer-bar">
       <div className="footer-top-items">
         <Link
-          to="/"
+          to="/bookmark"
           className="footer-item"
           onClick={() => handleClick("bookmark")}
         >
@@ -78,7 +78,7 @@ const Footer = () => {
       </div>
       <div className="footer-top-items">
         <Link
-          to="/auth"
+          to="/"
           className="footer-item"
           onClick={() => handleClick("auth")}
         >
