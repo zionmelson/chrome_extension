@@ -155,40 +155,40 @@ input[type="password"] {
 .signup-button {
   background-color: #242424;
   color: #fff;
-  padding: 8px 16px;
+  padding: 5px;
+  margin: 2px;
   border: none;
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  width:150px;
+  width: 150px;
 }
 
 .temp-container {
   text-align: center;
 }
 
-.active{
-    color: #fff;
+.active {
+  color: #fff;
 }
 
-.inactive{
-    color:#8b8b8b
+.inactive {
+  color: #8b8b8b;
 }
 
-.signup-container{
-  padding: 30px;
-  margin-top: 5px;
+.signup-container {
+  padding: 25px;
   background-color: #3b3b3b;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  justify-content: center;
 }
 
-.signup-button-container{
-    margin-top:10px;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.signup-button-container {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 }
 
 .sign-error-label {
@@ -210,5 +210,10 @@ input[type="password"] {
   border-radius: 4px;
   cursor: pointer;
   font-weight: bold;
-  width:150px;
+  width: 150px;
+}
+
+#username,
+#password {
+  width: 100%;
 }
