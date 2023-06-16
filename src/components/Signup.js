@@ -103,16 +103,16 @@ const Signup = () => {
                         <div className="top-container">
                             <h1>Signup</h1>
                         </div>
-                        <div className="bookmark-info">
+                        <div className="signup-container">
                             <div>
-                                <label htmlFor="username">Username:</label>
+                                <label htmlFor="username">Email</label>
                                 <input type="text" id="username" value={username} onChange={handleUsernameChange} className='form-field' />
                             </div>
                             <div>
-                                <label htmlFor="password">Password:</label>
+                                <label htmlFor="password">Password</label>
                                 <input type="password" id="password" value={password} onChange={handlePasswordChange}  className='form-field' />
                             </div>
-                            <div>
+                            <div className="signup-button-container">
                                 <button onClick={handleSignup} className="signup-button">Sign up</button>
                                 <button onClick={handleSignin} className="signup-button">Sign in</button>
                             </div>
