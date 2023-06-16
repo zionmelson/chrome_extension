@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 import Header from "./Header";
 import "./index.css";
@@ -11,6 +12,7 @@ const Signup = () => {
   const [isAuthorized, setAuthorized] = useState(
     localStorage.getItem("userLogedIn")
   );
+  const navigate = useNavigate();
 
   const handleUsernameChange = (e) => {
     setUsername(e.target.value);
@@ -35,10 +37,12 @@ const Signup = () => {
           localStorage.setItem("access", result.access);
           localStorage.setItem("userLogedIn", true);
           localStorage.setItem("email", username);
+          setAuthorized(result.success);
+          navigate("/bookmark")
         } else {
           setError(true);
+          setAuthorized(result.success);
         }
-        setAuthorized(result.success);
       }
     );
   };
@@ -68,8 +72,9 @@ const Signup = () => {
                 localStorage.setItem("userLogedIn", true);
                 localStorage.setItem("email", username);
                 setSignedup(true);
+                setAuthorized(result.success);
+                navigate("/bookmark")
               }
-              setAuthorized(result.success);
             }
           );
         }
@@ -77,10 +82,19 @@ const Signup = () => {
     );
   };
 
+  const handleSignout = () => {
+    localStorage.removeItem("refresh");
+    localStorage.removeItem("access");
+    localStorage.removeItem("userLogedin");
+    localStorage.removeItem("email");
+    setAuthorized(false);
+  }
+
   return (
     <div>
       <Header />
       <div className="bottom-container">
+        <div className="signout-button" onClick={handleSignout}>sign out</div>
         {isAuthorized ? (
           <>
             <div className="temp-container">

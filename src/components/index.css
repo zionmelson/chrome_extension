@@ -217,3 +217,16 @@ input[type="password"] {
 #password {
   width: 100%;
 }
+
+
+.signout-button {
+  width: 100%;
+  text-align: end;
+  text-decoration: underline;
+  font-size: large;
+}
+
+.signout-button:hover {
+  cursor: pointer;
+  color: rgb(201, 59, 16);
+}
