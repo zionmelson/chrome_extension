@@ -5,11 +5,11 @@ import { Bookmark, Temporary, Signup} from './components'
 const App = () => {
   return (
     <Routes>
-      <Route path="/" element={<Bookmark/>} />
+      <Route path="/" element={<Signup/>} />
       <Route path="/thumbs-up" element={<Temporary />} />
       <Route path="/search" element={<Temporary />} />
       <Route path="/settings" element={<Temporary />} />
-      <Route path="/auth" element={<Signup />} />
+      <Route path="/bookmark" element={<Bookmark />} />
     </Routes>
   )
 }
