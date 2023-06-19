@@ -38,7 +38,7 @@ const Signup = () => {
           localStorage.setItem("userLogedIn", true);
           localStorage.setItem("email", username);
           setAuthorized(result.success);
-          navigate("/bookmark")
+          navigate("/bookmark");
         } else {
           setError(true);
           setAuthorized(result.success);
@@ -73,7 +73,7 @@ const Signup = () => {
                 localStorage.setItem("email", username);
                 setSignedup(true);
                 setAuthorized(result.success);
-                navigate("/bookmark")
+                navigate("/bookmark");
               }
             }
           );
@@ -88,16 +88,18 @@ const Signup = () => {
     localStorage.removeItem("userLogedin");
     localStorage.removeItem("email");
     setAuthorized(false);
-  }
+  };
 
   return (
     <div>
       <Header />
       <div className="bottom-container">
-        <div className="signout-button" onClick={handleSignout}>sign out</div>
         {isAuthorized ? (
           <>
             <div className="temp-container">
+              <div className="signout-button" onClick={handleSignout}>
+                sign out
+              </div>
               {signedup ? (
                 <h1>Great your signed up.</h1>
               ) : (
