@@ -182,6 +182,9 @@ input[type="password"] {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
+  align-content: center;
+  /* not here */
 }
 
 .signup-button-container {
@@ -189,6 +192,7 @@ input[type="password"] {
   display: flex;
   flex-direction: row;
   justify-content: space-between;
+  /* not here */
 }
 
 .sign-error-label {
@@ -212,12 +216,6 @@ input[type="password"] {
   font-weight: bold;
   width: 150px;
 }
-
-#username,
-#password {
-  width: 100%;
-}
-
 
 .signout-button {
   width: 100%;
